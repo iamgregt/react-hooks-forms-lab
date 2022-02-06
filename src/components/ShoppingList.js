@@ -6,32 +6,19 @@ import Item from "./Item";
 function ShoppingList({ items }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, onSearchChange] = useState("")
-  const [formData, setFormData] = useState({
-    name: "",
-    category: "Produce"
-  })
-  
 
-  console.log(formData)
 
-  function handleFormData(e){
-    const key = e.target.name
-    setFormData({
-      ...formData,
-      [key]: e.target.value
-    })
+  function handleNewItem(newItem){
+
+    console.log(newItem)
+    // const key = e.target.name
+    // setFormData({
+    //   ...formData,
+    //   [key]: e.target.value
+    // })
   }
 
-  function addItem(e){
-    e.preventDefault()
-    const newItem = {
-      id: uuid(),
-      name: itemName,
-      category: itemCategory,
-    };
-    const newItemArray = [...items, newItem]
-    return newItemArray
-  }
+
 
   function handleFilteredInput(e){
     onSearchChange(e.target.value)
@@ -53,10 +40,10 @@ function ShoppingList({ items }) {
 
   return (
     <div className="ShoppingList">
-      <ItemForm onFormChange={handleFormData} onItemFormSubmit={addItem} />
+      <ItemForm onNewItem={handleNewItem} />
       <Filter 
       onCategoryChange={handleCategoryChange}
-      onFilterChange={handleFilteredInput}
+      onSearchChange={handleFilteredInput}
       search={search} />
       <ul className="Items">
         {itemsToDisplay.map((item) => (
