@@ -3,19 +3,16 @@ import ItemForm from "./ItemForm";
 import Filter from "./Filter";
 import Item from "./Item";
 
-function ShoppingList({ items }) {
+function ShoppingList({ items, onSetItems }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [search, onSearchChange] = useState("")
 
 
   function handleNewItem(newItem){
 
-    console.log(newItem)
-    // const key = e.target.name
-    // setFormData({
-    //   ...formData,
-    //   [key]: e.target.value
-    // })
+    let newItemsArray = [...items, newItem]
+
+    onSetItems(newItemsArray)
   }
 
 
@@ -40,7 +37,7 @@ function ShoppingList({ items }) {
 
   return (
     <div className="ShoppingList">
-      <ItemForm onNewItem={handleNewItem} />
+      <ItemForm onItemFormSubmit={handleNewItem} />
       <Filter 
       onCategoryChange={handleCategoryChange}
       onSearchChange={handleFilteredInput}
